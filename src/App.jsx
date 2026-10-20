@@ -16,6 +16,12 @@ function App() {
     setColors(colors.filter((color) => id !== color.id));
   }
 
+  function handleUpdateColor(updatedColor) {
+    setColors(
+      colors.map((color) => (updatedColor.id === color.id ? updatedColor : color)),
+    );
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
@@ -29,6 +35,7 @@ function App() {
             key={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onUpdateColor={handleUpdateColor}
           />
         ))
       )}

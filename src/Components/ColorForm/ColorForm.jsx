@@ -1,4 +1,4 @@
-import ColorInput from "../Color/ColorInput/ColorInput";
+import ColorInput from "../ColorInput/ColorInput";
 import "./ColorForm.css";
 
 export default function ColorForm({
@@ -8,12 +8,19 @@ export default function ColorForm({
     hex: "#123456",
     contrastText: "#ffffff",
   },
+  isEditing = false,
+  onCancel,
 }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onSubmitColor(data);
+
+    if (isEditing) {
+      onSubmitColor({ id: initialData.id, ...data });
+    } else {
+      onSubmitColor(data);
+    }
     event.target.reset();
   }
   return (
@@ -41,7 +48,12 @@ export default function ColorForm({
         <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
       </label>
       <br />
-      <button type="submit">ADD COLOR</button>
+      <button type="submit">{isEditing ? "UPDATE COLOR" : "ADD COLOR"}</button>
+      {isEditing && (
+        <button type="button" onClick={onCancel}>
+          CANCEL
+        </button>
+      )}
     </form>
   );
 }

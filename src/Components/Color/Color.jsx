@@ -1,10 +1,35 @@
+import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 import { useState } from "react";
 
-export default function Color({ color, onDeleteColor }) {
+export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const { id, role, hex, contrastText } = color;
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
+  function handleUpdate(updatedColor) {
+    onUpdateColor(updatedColor);
+    setIsEditing(false);
+  }
+
+  if (isEditing) {
+    return (
+      <div
+        className="color-card"
+        style={{
+          backgroundColor: hex,
+          color: contrastText,
+        }}
+      >
+        <ColorForm
+          initialData={color}
+          onSubmitColor={handleUpdate}
+          isEditing={true}
+          onCancel={() => setIsEditing(false)}
+        />
+      </div>
+    );
+  }
   return (
     <div
       className="color-card"
@@ -21,11 +46,14 @@ export default function Color({ color, onDeleteColor }) {
           <span>Really delete?</span>
           {/* cancel button hides confirmation dialog */}
           <button onClick={() => setIsDeleting(false)}>CANCEL</button>
-          {/* delete button triggers actual deletion fucntion from App */}
+          {/* delete button triggers actual deletion function from App */}
           <button onClick={() => onDeleteColor(id)}>DELETE</button>
         </div>
       ) : (
-        <button onClick={() => setIsDeleting(true)}>DELETE</button>
+        <>
+          <button onClick={() => setIsDeleting(true)}>DELETE</button>
+          <button onClick={() => setIsEditing(true)}>EDIT</button>
+        </>
       )}
     </div>
   );
