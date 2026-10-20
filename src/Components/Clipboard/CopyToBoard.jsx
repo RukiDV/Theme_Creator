@@ -1,31 +1,36 @@
 import { useEffect, useState } from "react";
 
 export default function CopyToClipboard({ hex }) {
-  const [isCopied, setIsCopied] = useState(false);
+  // manges current copy state: "default copy", "success", "error"
+  const [copyStatus, setCopyStatus] = useState("default_copy");
 
   useEffect(() => {
     let timeout;
 
-    if (isCopied) {
+    // start timer only then when statues is not the default state
+    if (copyStatus !== "default_copy") {
       timeout = setTimeout(() => {
-        setIsCopied(false);
+        setCopyStatus("default_copy");
       }, 3000);
     }
     return () => clearTimeout(timeout);
-  }, [isCopied]);
+  }, [copyStatus]);
 
   async function handleCopyClipboard() {
     try {
       await navigator.clipboard.writeText(hex);
-      setIsCopied(true);
+      setCopyStatus("success");
     } catch (error) {
       console.log("Failed to copy: ", error);
+      setCopyStatus("error");
     }
   }
 
   return (
     <button type="button" onClick={handleCopyClipboard}>
-      {isCopied ? "Successfully copied" : "COPY"}
+      {copyStatus === "success" && "Successfully copied!"}
+      {copyStatus === "error" && "Failed to copy!"}
+      {copyStatus === "default_copy" && "COPY"}
     </button>
   );
 }
