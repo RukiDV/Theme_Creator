@@ -1,4 +1,5 @@
 import ColorForm from "../ColorForm/ColorForm";
+import CopyToClipboard from "../Clipboard/CopyToBoard";
 import "./Color.css";
 import { useState } from "react";
 
@@ -38,9 +39,14 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         color: contrastText,
       }}
     >
-      <h3 className="color-card-headline">{hex}</h3>
+      {/* add copy button */}
+      <div className="color-card-headline-container">
+        <h3 className="color-card-headline">{hex}</h3>
+        <CopyToClipboard hex={hex} />
+      </div>
       <p>{role}</p>
       <p>contrast: {contrastText}</p>
+      {/* add delete and edit button */}
       {isDeleting ? (
         <div className="color-card-highlight">
           <span>Really delete?</span>
