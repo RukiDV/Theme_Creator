@@ -13,14 +13,14 @@ function App() {
   }
 
   function handleDeleteColor(id) {
-    setColors(colors.filter((color) => id !== colors.id));
+    setColors(colors.filter((color) => id !== color.id));
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleAddColor} />
-      // show hint if no color is available
+      {/* show hint if no color is available */}
       {colors.length === 0 ? (
         <p>No colors left. PLease add some new colors to your palette!</p>
       ) : (
