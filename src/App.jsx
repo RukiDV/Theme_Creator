@@ -12,13 +12,26 @@ function App() {
     setColors([{ id: uid(), ...newColor }, ...colors]);
   }
 
+  function handleDeleteColor(id) {
+    setColors(colors.filter((color) => id !== colors.id));
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleAddColor} />
-      {colors.map((color) => (
-        <Color key={color.id} color={color} />
-      ))}
+      // show hint if no color is available
+      {colors.length === 0 ? (
+        <p>No colors left. PLease add some new colors to your palette!</p>
+      ) : (
+        colors.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={handleDeleteColor}
+          />
+        ))
+      )}
     </>
   );
 }
