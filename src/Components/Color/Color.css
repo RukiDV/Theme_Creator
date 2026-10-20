@@ -9,3 +9,12 @@
   background: black;
   color: white;
 }
+
+.color-card-highlight {
+  display: inline-block;
+  padding: 4px 8px;
+  background: black;
+  color: white;
+}
+
+
