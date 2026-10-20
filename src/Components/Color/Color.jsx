@@ -19,7 +19,9 @@ export default function Color({ color, onDeleteColor }) {
       {isDeleting ? (
         <div className="color-card-highlight">
           <span>Really delete?</span>
-          <button onClick={() => setIsDeleting(false)}>CANCLE</button>
+          {/* cancel button hides confirmation dialog */}
+          <button onClick={() => setIsDeleting(false)}>CANCEL</button>
+          {/* delete button triggers actual deletion fucntion from App */}
           <button onClick={() => onDeleteColor(id)}>DELETE</button>
         </div>
       ) : (
