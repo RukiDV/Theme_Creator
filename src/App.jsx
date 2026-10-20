@@ -35,7 +35,7 @@ function App() {
             key={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
-            onColorUpdate={handleUpdateColor}
+            onUpdateColor={handleUpdateColor}
           />
         ))
       )}
