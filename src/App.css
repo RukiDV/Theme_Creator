@@ -2,15 +2,3 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
-
-.theme-delete-confirmation {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.theme-edit-form {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-}
