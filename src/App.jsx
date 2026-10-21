@@ -1,40 +1,54 @@
-import { initialColors } from "./lib/colors";
-import useLocalStorageState from "use-local-storage-state";
-import { uid } from "uid";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
+import ThemeSelector from "./Components/ThemeSelector/ThemeSelector";
 import "./App.css";
+import { useThemes } from "./hooks/useTheme";
 
 function App() {
-  const [colors, setColors] = useLocalStorageState("colors", {
-    defaultValue: initialColors,
-  });
-
-  function handleAddColor(newColor) {
-    setColors([{ id: uid(), ...newColor }, ...colors]);
-  }
-
-  function handleDeleteColor(id) {
-    setColors(colors.filter((color) => id !== color.id));
-  }
-
-  function handleUpdateColor(updatedColor) {
-    setColors(
-      colors.map((color) =>
-        updatedColor.id === color.id ? updatedColor : color,
-      ),
-    );
-  }
+  // custom useTheme hook
+  const {
+    themes,
+    currentThemeId,
+    currentTheme,
+    isDefaultTheme,
+    themeAction,
+    setThemeAction,
+    handleThemeChange,
+    handleAddColor,
+    handleDeleteColor,
+    handleUpdateColor,
+    handleAddTheme,
+    handleEditTheme,
+    handleUpdateTheme,
+    handleDeleteTheme
+  } = useThemes();
 
   return (
     <>
       <h1>Theme Creator</h1>
+
+      <ThemeSelector 
+      themes={themes}
+      currentThemeId={currentThemeId}
+      currentTheme={currentTheme}
+      isDefaultTheme={isDefaultTheme}
+      themeAction={themeAction}
+      onThemeChange={handleThemeChange}
+      onAddTheme={handleAddTheme}
+      onEditTheme={handleEditTheme}
+      onUpdateTheme={handleUpdateTheme}
+      onDeleteTheme={handleDeleteTheme}
+      onSetThemeAction={setThemeAction}
+      />
+
+      {/* add new color to current theme */}
       <ColorForm onSubmitColor={handleAddColor} />
+
       {/* show hint if no color is available */}
-      {colors.length === 0 ? (
+      {currentTheme.colors.length === 0 ? (
         <p>No colors left. PLease add some new colors to your palette!</p>
       ) : (
-        colors.map((color) => (
+        currentTheme.colors.map((color) => (
           <Color
             key={color.id}
             color={color}

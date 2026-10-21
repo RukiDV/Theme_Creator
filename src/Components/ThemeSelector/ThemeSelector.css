@@ -1,0 +1,11 @@
+.theme-delete-confirmation {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.theme-edit-form {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+}
