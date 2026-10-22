@@ -2,3 +2,26 @@ body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
 }
+
+.rainbow-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.rainbow-title span:nth-child(1) { color: #ff595e; } 
+.rainbow-title span:nth-child(2) { color: #ffca3a; }
+.rainbow-title span:nth-child(3) { color: #8ac926; }
+.rainbow-title span:nth-child(4) { color: #1982c4; }
+.rainbow-title span:nth-child(5) { color: #6a4c93; }
+.rainbow-title span:nth-child(7) { color: #ff595e; }
+.rainbow-title span:nth-child(8) { color: #ffca3a; }
+.rainbow-title span:nth-child(9) { color: #8ac926; }
+.rainbow-title span:nth-child(10) { color: #1982c4; }
+.rainbow-title span:nth-child(11) { color: #6a4c93; }
+.rainbow-title span:nth-child(12) { color: #ff595e; }
+.rainbow-title span:nth-child(13) { color: #ffca3a; }
