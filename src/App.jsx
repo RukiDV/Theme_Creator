@@ -20,25 +20,39 @@ function App() {
     handleAddTheme,
     handleEditTheme,
     handleUpdateTheme,
-    handleDeleteTheme
+    handleDeleteTheme,
   } = useThemes();
 
   return (
     <>
-      <h1>Theme Creator</h1>
+      <h1 className="rainbow-title">
+        <span>T</span>
+        <span>h</span>
+        <span>e</span>
+        <span>m</span>
+        <span>e</span>
+        <span> </span>
+        <span>C</span>
+        <span>r</span>
+        <span>e</span>
+        <span>a</span>
+        <span>t</span>
+        <span>o</span>
+        <span>r</span>
+      </h1>
 
-      <ThemeSelector 
-      themes={themes}
-      currentThemeId={currentThemeId}
-      currentTheme={currentTheme}
-      isDefaultTheme={isDefaultTheme}
-      themeAction={themeAction}
-      onThemeChange={handleThemeChange}
-      onAddTheme={handleAddTheme}
-      onEditTheme={handleEditTheme}
-      onUpdateTheme={handleUpdateTheme}
-      onDeleteTheme={handleDeleteTheme}
-      onSetThemeAction={setThemeAction}
+      <ThemeSelector
+        themes={themes}
+        currentThemeId={currentThemeId}
+        currentTheme={currentTheme}
+        isDefaultTheme={isDefaultTheme}
+        themeAction={themeAction}
+        onThemeChange={handleThemeChange}
+        onAddTheme={handleAddTheme}
+        onEditTheme={handleEditTheme}
+        onUpdateTheme={handleUpdateTheme}
+        onDeleteTheme={handleDeleteTheme}
+        onSetThemeAction={setThemeAction}
       />
 
       {/* add new color to current theme */}
@@ -46,7 +60,7 @@ function App() {
 
       {/* show hint if no color is available */}
       {currentTheme.colors.length === 0 ? (
-        <p>No colors left. PLease add some new colors to your palette!</p>
+        <p>No colors left. Please add some new colors to your palette!</p>
       ) : (
         currentTheme.colors.map((color) => (
           <Color

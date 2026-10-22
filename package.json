@@ -13,6 +13,7 @@
   "dependencies": {
     "@octokit/rest": "^20.1.0",
     "dotenv": "^16.4.5",
+    "lucide-react": "^1.61.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swr": "^2.5.1",

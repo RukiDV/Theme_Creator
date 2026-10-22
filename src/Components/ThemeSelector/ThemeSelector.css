@@ -1,11 +1,87 @@
+.theme-selector-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 10px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+}
+
+.theme-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* dropdown menu */
+.theme-dropdown {
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px 32px 8px 12px;
+  font-size: 1.0rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  height: 36px;
+}
+
+.theme-dropdown:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.theme-dropdown:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* edit input */
+.theme-edit-form {
+  display: inline-flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.8);
+  align-items: center;
+  color: white;
+  padding: 8px 8px;
+  border-radius: 8px;
+}
+
+.theme-input {
+  padding: 6px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background: white;
+  height: 36px;
+}
+
+.theme-input:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* delete */
 .theme-delete-confirmation {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.85rem;
 }
 
-.theme-edit-form {
-  display: inline-flex;
-  gap: 7px;
-  align-items: center;
+.icon-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
 }

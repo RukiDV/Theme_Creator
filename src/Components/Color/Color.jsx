@@ -3,6 +3,7 @@ import CopyToClipboard from "../Clipboard/CopyToBoard";
 import ContrastChecker from "../ContrastChecker/ContrastChecker";
 import "./Color.css";
 import { useState } from "react";
+import { Plus, Pencil, Trash, Check, X } from "lucide-react";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const { id, role, hex, contrastText } = color;
@@ -46,25 +47,25 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         <CopyToClipboard hex={hex} />
       </div>
 
-      <p>{role}</p>
-      <p>contrast: {contrastText}</p>
+      <p className="color-card-role">{role}</p>
+      <p className="color-card-contrast"> Contrast: {contrastText}</p>
 
       <ContrastChecker hex={hex} contrastText={contrastText} />
 
       {/* add delete and edit button */}
       {isDeleting ? (
-        <div className="color-card-highlight">
-          <span>Really delete?</span>
+        <div className="color-card-delete-confirmation">
+          <span>Really delete? </span>
           {/* cancel button hides confirmation dialog */}
-          <button onClick={() => setIsDeleting(false)}>CANCEL</button>
+          <button type="button" title="Cancel" className="icon-button" onClick={() => setIsDeleting(false)}><X size={16} /> </button>
           {/* delete button triggers actual deletion function from App */}
-          <button onClick={() => onDeleteColor(id)}>DELETE</button>
+          <button type="button" title="Confirm Delete" className="icon-button" onClick={() => onDeleteColor(id)}><Check size={16} /> </button>
         </div>
       ) : (
-        <>
-          <button onClick={() => setIsDeleting(true)}>DELETE</button>
-          <button onClick={() => setIsEditing(true)}>EDIT</button>
-        </>
+        <div className="color-card-actions">
+          <button type="button" title="Delete Color" className="icon-button" onClick={() => setIsDeleting(true)}><Trash size={16} /> </button>
+          <button type="button" title="Edit Color" className="icon-button" onClick={() => setIsEditing(true)}><Pencil size={16} /> </button>
+        </div>
       )}
     </div>
   );

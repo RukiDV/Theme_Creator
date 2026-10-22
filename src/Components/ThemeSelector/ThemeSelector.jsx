@@ -1,4 +1,5 @@
-import "./ThemeSelector.css"
+import "./ThemeSelector.css";
+import { Plus, Pencil, Trash, Check, X } from "lucide-react";
 
 export default function ThemeSelector({
   themes,
@@ -20,6 +21,7 @@ export default function ThemeSelector({
         <form className="theme-edit-form" onSubmit={onUpdateTheme}>
           <input
             type="text"
+            className="theme-input"
             value={themeAction.nameInput}
             onChange={(event) =>
               onSetThemeAction({
@@ -29,19 +31,28 @@ export default function ThemeSelector({
             }
             autoFocus
           />
-          <button type="submit">UPDATE</button>
+          <button type="submit" className="icon-button" title="Update Theme">
+            <Check size={16} />
+          </button>
           <button
             type="button"
+            className="icon-button"
+            title="Cancel"
             onClick={() =>
               onSetThemeAction({ ...themeAction, isEditing: false })
             }
           >
-            CANCEL
+            <X size={16} />
           </button>
         </form>
       ) : (
         // show dropdown list
-        <select value={currentThemeId} onChange={onThemeChange}>
+        <select
+          className="theme-dropdown"
+          title="Select Color Theme"
+          value={currentThemeId}
+          onChange={onThemeChange}
+        >
           {themes.map((theme) => (
             <option key={theme.id} value={theme.id}>
               {theme.name}
@@ -51,39 +62,55 @@ export default function ThemeSelector({
       )}
 
       {/* theme buttons  */}
-      <button type="button" onClick={onAddTheme}>
-        ADD
-      </button>
+      <div className="theme-actions">
+        <button type="button" className="icon-button" onClick={onAddTheme} title="Add New Theme">
+          <Plus size={16} />
+        </button>
 
-      <button type="button" onClick={onEditTheme} disabled={isDefaultTheme}>
-        EDIT
-      </button>
-
-      {/* delete button: show confirmation dialog or delete button */}
-      {themeAction.isDeleting ? (
-        <span className="theme-delete-confirmation">
-          <span>Really delete color theme?</span>
+        {!themeAction.isEditing && (
           <button
             type="button"
-            onClick={() =>
-              onSetThemeAction({ ...themeAction, isDeleting: false })
-            }
+            className="icon-button"
+            title={isDefaultTheme ? "Default theme cannot be edited" : "Edit Theme Name"}
+            onClick={onEditTheme}
+            disabled={isDefaultTheme}
           >
-            CANCEL
+            <Pencil size={16} />
           </button>
-          <button type="button" onClick={onDeleteTheme}>
-            CONFIRM DELETE
+        )}
+
+        {/* delete button: show confirmation dialog or delete button */}
+        {themeAction.isDeleting ? (
+          <div className="theme-delete-confirmation">
+            <span>Really delete color theme?</span>
+            <button
+              type="button"
+              className="icon-button"
+              title="Cancel"
+              onClick={() =>
+                onSetThemeAction({ ...themeAction, isDeleting: false })
+              }
+            >
+              <X size={16} />
+            </button>
+            <button type="button" className="icon-button" title="Confirm Delete" onClick={onDeleteTheme}>
+              <Check size={16} />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="icon-button"
+            title={isDefaultTheme ? "Default theme cannot be deleted" : "Delete Theme"}
+            onClick={() =>
+              onSetThemeAction({ ...themeAction, isDeleting: true })
+            }
+            disabled={isDefaultTheme}
+          >
+            <Trash size={16} />
           </button>
-        </span>
-      ) : (
-        <button
-          type="button"
-          onClick={() => onSetThemeAction({ ...themeAction, isDeleting: true })}
-          disabled={isDefaultTheme}
-        >
-          DELETE
-        </button>
-      )}
+        )}
+      </div>
     </div>
   );
 }
