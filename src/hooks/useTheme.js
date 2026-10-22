@@ -120,6 +120,30 @@ export function useThemes() {
     setThemeAction({ isEditing: false, isDeleting: false, nameInput: "" });
   }
 
+  // move colors after adding to get correct palette
+  function handleMoveColor(colorId, direction) {
+    const colors = [...currentTheme.colors];
+    const index = colors.findIndex((c) => c.id === colorId);
+
+    if (index === -1) return;
+
+    const targetIndex = direction === "left" ? index - 1 : index + 1;
+
+    // check out of bounce
+    if (targetIndex < 0 || targetIndex >= colors.length) return;
+
+    // swap elements in array
+    const temp = colors[index];
+    colors[index] = colors[targetIndex];
+    colors[targetIndex] = temp;
+
+    setThemes(
+      themes.map((theme) =>
+        theme.id === currentTheme.id ? { ...theme, colors } : theme
+      )
+    );
+  }
+
   return {
     themes,
     currentThemeId,
@@ -134,6 +158,7 @@ export function useThemes() {
     handleAddTheme,
     handleEditTheme,
     handleUpdateTheme,
-    handleDeleteTheme
+    handleDeleteTheme,
+    handleMoveColor
   };
 }

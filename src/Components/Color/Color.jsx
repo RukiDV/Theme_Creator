@@ -3,9 +3,9 @@ import CopyToClipboard from "../Clipboard/CopyToBoard";
 import ContrastChecker from "../ContrastChecker/ContrastChecker";
 import "./Color.css";
 import { useState } from "react";
-import { Plus, Pencil, Trash, Check, X } from "lucide-react";
+import { Plus, Pencil, Trash, Check, X, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function Color({ color, onDeleteColor, onUpdateColor }) {
+export default function Color({ color, onDeleteColor, onUpdateColor, onMoveColor }) {
   const { id, role, hex, contrastText } = color;
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -63,6 +63,27 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         </div>
       ) : (
         <div className="color-card-actions">
+          {/* move button left */}
+          <button
+            type="button"
+            title="Move Left"
+            className="icon-button"
+            onClick={() => onMoveColor(id, "left")}
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          {/* move button right*/}
+          <button
+            type="button"
+            title="Move Right"
+            className="icon-button"
+            onClick={() => onMoveColor(id, "right")}
+          >
+            <ChevronRight size={16} />
+          </button>
+
+          {/* delete and edit button */}
           <button type="button" title="Delete Color" className="icon-button" onClick={() => setIsDeleting(true)}><Trash size={16} /> </button>
           <button type="button" title="Edit Color" className="icon-button" onClick={() => setIsEditing(true)}><Pencil size={16} /> </button>
         </div>

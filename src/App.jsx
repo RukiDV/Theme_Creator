@@ -21,6 +21,7 @@ function App() {
     handleEditTheme,
     handleUpdateTheme,
     handleDeleteTheme,
+    handleMoveColor,
   } = useThemes();
 
   return (
@@ -68,6 +69,7 @@ function App() {
             color={color}
             onDeleteColor={handleDeleteColor}
             onUpdateColor={handleUpdateColor}
+            onMoveColor={handleMoveColor}
           />
         ))
       )}
